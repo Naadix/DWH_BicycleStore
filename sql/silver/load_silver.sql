@@ -158,14 +158,8 @@ BEGIN
             ELSE TRIM(phone)
         END AS phone,
         active,
-        CASE
-            WHEN store_id IS NULL THEN NULL -- handle null store_id values
-            ELSE store_id
-        END AS store_id,
-        CASE
-            WHEN manager_id IS NULL THEN NULL -- handle null manager_id values
-            ELSE manager_id
-        END AS manager_id
+        store_id,
+        manager_id
     FROM bronze.staffs;    
     PRINT 'STAFFS TABLE LOADED THE DATA WTHOUT ANY TRANSFORMATION';
     SET @end_time = GETDATE();
@@ -206,14 +200,8 @@ BEGIN
                 WHEN shipped_date IS NULL THEN '1900-01-01' -- handle null shipped_date
                 ELSE shipped_date
             END AS shipped_date,
-            CASE 
-                WHEN store_id IS NULL THEN NULL -- handle null store_id values
-                ELSE store_id
-            END AS store_id,
-            CASE 
-                WHEN staff_id IS NULL THEN NULL -- handle null staff_id values
-                ELSE staff_id
-            END AS staff_id
+            store_id,
+            staff_id
         FROM bronze.orders   
         PRINT 'ORDERS TABLE LOADED THE DATA WITH TRANSFORMATION';
         SET @end_time = GETDATE();
@@ -239,14 +227,8 @@ BEGIN
                 LEN(product_name) -CHARINDEX(' - ',REVERSE(product_name)) -2
             )
         ),
-        CASE
-            WHEN brand_id IS NULL THEN 0 -- handle null brand_id values
-            ELSE brand_id
-        END AS brand_id,
-        CASE
-            WHEN category_id IS NULL THEN 0 -- handle null category_id values
-            ELSE category_id
-        END AS category_id,
+        brand_id,
+        category_id,
         CASE
             WHEN model_year IS NULL THEN 1900 -- handle null model_year values
             ELSE model_year
@@ -284,18 +266,12 @@ BEGIN
             discount
         )
         SELECT 
-            CASE
-                WHEN order_id IS NULL THEN 0 -- handle null order_id values
-                ELSE order_id
-            END AS order_id,
+            order_id,
             CASE
                 WHEN TRY_CONVERT(INT, item_id) IS NULL THEN 0 -- handle null item_id values
                 ELSE TRY_CONVERT(INT, item_id)
             END AS item_id,
-            CASE
-                WHEN product_id IS NULL THEN 0 -- handle null product_id values
-                ELSE product_id
-            END AS product_id,
+            product_id,
             CASE 
                 WHEN TRY_CONVERT(INT, quantity) IS NULL THEN 0 -- handle null quantity values
                 ELSE TRY_CONVERT(INT, quantity)
@@ -322,14 +298,8 @@ BEGIN
         quantity
     )
     SELECT 
-        CASE
-            WHEN TRY_CONVERT(INT, store_id) IS NULL THEN 0 -- handle null store_id values
-            ELSE TRY_CONVERT(INT, store_id)
-        END AS store_id,
-        CASE
-            WHEN TRY_CONVERT(INT, product_id) IS NULL THEN 0 -- handle null product_id values
-            ELSE TRY_CONVERT(INT, product_id)
-        END AS product_id,
+        store_id,
+        product_id,
         CASE
             WHEN TRY_CONVERT(INT, quantity) IS NULL THEN 0 -- handle null quantity values
             ELSE TRY_CONVERT(INT, quantity)
