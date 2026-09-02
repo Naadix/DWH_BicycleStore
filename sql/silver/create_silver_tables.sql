@@ -107,7 +107,7 @@ CREATE TABLE silver.staffs(
     phone NVARCHAR(20),
     active BIT,
     store_id INT CONSTRAINT fk_store_id_staffs_table FOREIGN KEY REFERENCES silver.stores(store_id),
-    manager_id INT,
+    manager_id INT CONSTRAINT fk_manager_id_staffs_table FOREIGN KEY REFERENCES silver.staffs(staff_id),
     dwh_created_date DATETIME DEFAULT GETDATE()
 )
 GO
