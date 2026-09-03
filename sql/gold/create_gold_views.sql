@@ -200,10 +200,6 @@ SELECT
         ELSE i.order_item_sk
     END AS order_item_sk,
     CASE
-        WHEN inv.inventory_key IS NULL THEN -1
-        ELSE inv.inventory_key
-    END AS inventory_key,
-    CASE
         WHEN c.customer_id IS NULL THEN -1
         ELSE c.customer_id
     END AS customer_id,
@@ -252,8 +248,6 @@ LEFT JOIN gold.dim_date d_order ON o.order_date = d_order.full_date
 LEFT JOIN gold.dim_date d_required ON o.required_date = d_required.full_date
 
 LEFT JOIN gold.dim_date d_shipped ON o.shipped_date = d_shipped.full_date
-
-LEFT JOIN gold.fact_inventory inv ON o.store_id = inv.store_id 
 
 GO
 
