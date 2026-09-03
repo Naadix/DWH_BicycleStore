@@ -6,10 +6,10 @@ This project implements a modern Data Warehouse (DWH) for a Bicycle Store using 
 The pipeline follows a structured approach of moving data through three distinct layers: **Bronze**, **Silver**, and **Gold**.
 
 ## Data Architecture
-![Data Architecture](./docs/data_architecture.png)
+![Data Architecture](docs/Data_Architecture.png)
 
 ## Data Flow
-![Data Flow](./docs/DataFlow.png)
+![Data Flow](docs/DataFlow.png)
 
 ## Architecture Layers
 
